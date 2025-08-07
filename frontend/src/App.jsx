@@ -4,23 +4,28 @@ import { Route, Routes } from 'react-router-dom'
 import { SignupPage } from './pages/SignupPage'
 import { LoginPage } from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import AuthRoutes from './routes/AuthRoutes'
+import IsLogin from './routes/IsLogin'
 
 function App() {
 
   return(
     <div>
-      <Navbar/>
 
       <Routes>
-        <Route path='/' element={<Dashboard/>}/>
-        <Route path='/signup' element={<SignupPage/>}/>
-        <Route path='/login' element={<LoginPage/>}/>
+        <Route element={<IsLogin/>}>
+          <Route path='/signup' element={<SignupPage/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
+        </Route>
+
+        {/* SECURE ROUTES */}
+        <Route element={<AuthRoutes/>}>
+          <Route path='/' element={<Dashboard/>}/>
+        </Route>
+        
         <Route path='*' element={'404 not found'}/>
       </Routes>
 
-      <Footer/>
     </div>
   )
 }

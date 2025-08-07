@@ -3,12 +3,14 @@ import cors from 'cors';
 
 const app = express();
 
+// ✅ CORS Setup for frontend on localhost:5173
+app.use(cors({
+  origin: '*'
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-}));
+
 
 import userRouter from './routes/user.route.js';
 
