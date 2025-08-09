@@ -57,7 +57,7 @@ export const SignupPage = () => {
     }
   }
 
-  let captchaOperators = ["+", "-", "*", "/"];
+  let captchaOperators = ["+", "-"];
   const generateCaptcha = () => {
 
     let str = `${Math.floor(Math.random() * 100)}${

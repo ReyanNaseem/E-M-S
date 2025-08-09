@@ -1,10 +1,16 @@
 import React from 'react'
 import LogoContainer from './LogoContainer'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { AuthSlicePath } from '../redux/slice/auth.slice';
+import { toast } from 'react-toastify';
+import { useMainContext } from '../context/mainContext';
 
 const Navbar = () => {
-  const token = !!localStorage.getItem('token');
+  const user = useSelector(AuthSlicePath)
+  const {logoutHandler} = useMainContext()
   
+
   return (
     <>
     <header className='w-full shadow'>
@@ -14,15 +20,17 @@ const Navbar = () => {
               <li>
                 <Link to={'/'} className='font-pmedium'>Dashboard</Link>
               </li>
+              {!user?<>
               <li>
-                <Link to={'/login'} className={`${token?'hidden':'block'} font-pmedium px-4 py-2 bg-indigo-500 text-white outline-none border rounded`}>Login</Link>
+                <Link to={'/login'} className={`font-pmedium px-4 py-2 bg-indigo-500 text-white outline-none border rounded`}>Login</Link>
               </li>
               <li>
-                <Link to={'/signup'} className={`${token?'hidden':'block'} font-pmedium px-4 py-2 bg-red-500 text-white outline-none border rounded`}>Signup</Link>
+                <Link to={'/signup'} className={`font-pmedium px-4 py-2 bg-red-500 text-white outline-none border rounded`}>Signup</Link>
               </li>
+              </>:
               <li>
-                <Link onClick={()=>localStorage.removeItem('token')} to={'/login'} className={`${token?'block':'hidden'} font-pmedium px-4 py-2 bg-red-500 text-white outline-none border rounded`}>Logout</Link>
-              </li>
+                <Link onClick={logoutHandler} to={'/login'} className={`font-pmedium px-4 py-2 bg-red-500 text-white outline-none border rounded`}>Logout</Link>
+              </li>}
             </ul>
         </div>
     </header>

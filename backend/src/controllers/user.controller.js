@@ -23,16 +23,9 @@ const registerUser = async( req, res )=>{
         // })
         const user = await User.create(req.body);
 
-        const token = jwt.sign(
-            {id: user._id},
-            process.env.JWT_SECRET,
-            {expiresIn:'7d'}
-        )
-
         return res.status(200).json({
             message: 'User register successfully',
-            data: user,
-            token
+            data: user
         })
 
     } catch (error) {
@@ -61,16 +54,16 @@ const loginUser = async(req,res)=>{
             })
         }
 
-        const user = await bcrypt.compare(password, existUser.password)
+        const ispasswordValid = await bcrypt.compare(password, existUser.password)
 
-        if(!user){
+        if(!ispasswordValid){
             return res.status(401).json({
                 message: 'Invalid credentials'
             })
         }
 
         const token = jwt.sign(
-            {id: user._id},
+            {id: existUser._id},
             process.env.JWT_SECRET,
             {expiresIn: '7d'}
         )
@@ -88,7 +81,38 @@ const loginUser = async(req,res)=>{
     }
 }
 
+const verifyUser = async(req, res)=>{
+    try {
+
+        return res.status(200).json({
+            data: req.user,
+            message: "Verify Successfully",
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "An error occur while verify user",
+            error: error.message
+        })
+    }
+}
+
+const getAllUser = async(req, res)=>{
+    try {
+        const users = await User.find();
+        return res.status(201).json({
+            data: users,
+            message: 'Fetch all users'
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: 'An error occur while geting users'
+        })
+    }
+}
+
 export {
     registerUser,
-    loginUser
+    loginUser,
+    verifyUser,
+    getAllUser
 }

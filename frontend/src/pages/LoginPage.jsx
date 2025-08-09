@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { axiosClient } from '../utils/axiosClient';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useMainContext } from '../context/mainContext';
 
 export const LoginPage = () => {
 
@@ -17,6 +18,7 @@ export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const {fetchUserProfile} = useMainContext()
   const initialValues = {
     email: '',
     password: '',
@@ -43,6 +45,7 @@ export const LoginPage = () => {
       const data = await response.data;
       localStorage.setItem('token',data.token)
       toast.success(data.message)
+      await fetchUserProfile()
       helpers.resetForm()
       navigate('/')
             
@@ -53,7 +56,7 @@ export const LoginPage = () => {
     }
   }
 
-  let captchaOperators = ["+", "-", "*", "/"];
+  let captchaOperators = ["+", "-"];
   const generateCaptcha = () => {
 
     let str = `${Math.floor(Math.random() * 100)}${

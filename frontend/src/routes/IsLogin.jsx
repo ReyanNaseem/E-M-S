@@ -1,13 +1,13 @@
 import React from 'react'
 import { LoginPage } from '../pages/LoginPage'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
 const IsLogin = () => {
     const token = !!localStorage.getItem('token')
   return (
     <div>
         {
-            token?<Navigate to={'/'} />:<LoginPage/>
+            token?<Navigate to={'/'} />:<Outlet/>
         }
     </div>
   )
