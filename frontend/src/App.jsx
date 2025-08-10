@@ -6,6 +6,8 @@ import { LoginPage } from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import AuthRoutes from './routes/AuthRoutes'
 import IsLogin from './routes/IsLogin'
+import AddEmployee from './pages/AddEmployee'
+import AllEmployee from './pages/AllEmployee'
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
         {/* SECURE ROUTES */}
         <Route element={<AuthRoutes/>}>
           <Route path='/' element={<Dashboard/>}/>
+          <Route path='/add-employee' element={<AddEmployee/>}/>
+          <Route path='/all-employee' element={<AllEmployee/>}/>
         </Route>
         
         <Route path='*' element={'404 not found'}/>
