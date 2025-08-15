@@ -7,6 +7,10 @@ const employeeschema = new Schema(
             ref: 'User',
             required: true
         },
+        empId:{
+            type: String,
+            required: true
+        },
         name:{
             type: String,
             required: true
@@ -30,7 +34,6 @@ const employeeschema = new Schema(
         email:{
             type: String,
             required: true,
-            unique: true
         },
         address:{
             type: String,

@@ -17,9 +17,6 @@ const Navbar = () => {
         <div className='w-[96%] lg:w-[80%] container mx-auto py-4 flex items-center justify-between'>
             <LogoContainer/>
             <ul className='flex items-center justify-center gap-x-3'>
-              <li>
-                <Link to={'/'} className='font-pmedium'>Dashboard</Link>
-              </li>
               {!user?<>
               <li>
                 <Link to={'/login'} className={`font-pmedium px-4 py-2 bg-indigo-500 text-white outline-none border rounded`}>Login</Link>

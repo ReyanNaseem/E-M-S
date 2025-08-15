@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { User } from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
+import { Employee } from "../models/employee.model.js";
 
 const registerUser = async( req, res )=>{
     try {
@@ -83,11 +84,15 @@ const loginUser = async(req,res)=>{
 
 const verifyUser = async(req, res)=>{
     try {
+        const user = await User.findById(req.user)
+        const employee = await Employee.countDocuments({user:req.user})
 
         return res.status(200).json({
-            data: req.user,
-            message: "Verify Successfully",
+            ...user.toObject(),
+            total_emp: employee
         })
+
+
     } catch (error) {
         return res.status(500).json({
             message: "An error occur while verify user",

@@ -1,12 +1,17 @@
 import React from 'react'
 import Layout from './Layout'
 import * as yup from 'yup';
-import {ErrorMessage, Field, Formik} from 'formik'
+import {ErrorMessage, Field, Formik, Form} from 'formik'
 import { EmployeeRoles } from '../utils/constant'
 import {CustomLoaderButton} from '../components/CustomLoaderButton'
 import { toast } from 'react-toastify';
+import { axiosClient } from '../utils/axiosClient';
+import { useState } from 'react';
+import { useMainContext } from '../context/mainContext';
 
 const AddEmployee = () => {
+    const [loading, setLoading] = useState(false);
+    const {fetchUserProfile} = useMainContext()
 
     const initialValues = {
         name:'',
@@ -20,7 +25,7 @@ const AddEmployee = () => {
 
     const validationSchema = yup.object({
         'name':yup.string().required("Name is Required"),
-        'salary':yup.string().required("Salary is Required"),
+        'salary':yup.number().min(1,"Salary cannot be negative or zero").required("Salary is Required"),
         'role':yup.string().required("Role is Required"),
         'mobile':yup.string().required("Mobile is Required"),
         'address':yup.string().required("Address is Required"),
@@ -28,10 +33,22 @@ const AddEmployee = () => {
     })
 
     const onSubmitHandler = async(values, helpers)=>{
+        
         try {
-            
+            setLoading(true)
+            const response = await axiosClient.post('/add-emp', values,{
+                headers:{
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            const data = await response.data;
+            toast.success(data.message);
+            helpers.resetForm();
+            await fetchUserProfile()
         } catch (error) {
             toast.error(error?.response?.data?.error || error.message)
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -42,7 +59,7 @@ const AddEmployee = () => {
             onSubmit={onSubmitHandler}
             validationSchema={validationSchema}
         >
-            <form className='w-[90%] mx-auto py-10'>
+            <Form className='w-[90%] mx-auto py-10'>
                 <div className="mb-3">
                     <label htmlFor="">Employee Name <span className="text-red-500">*</span></label>
                     <Field type="text" name='name' className='w-full py-2 border border-gray-300 rounded outline-none px-3 placeholder:font-pmedium' placeholder='Enter Employee Name' />
@@ -52,7 +69,7 @@ const AddEmployee = () => {
                 <div className="mb-3">
                     <label htmlFor="">Employee Role <span className="text-red-500">*</span></label>
                     <Field as="select" name='role' className='w-full py-2 border border-gray-300 rounded outline-none px-3 placeholder:font-pmedium'>
-                        <option>------select------</option>
+                        <option value={''}>------select------</option>
                         {
                             EmployeeRoles.map((curr,i)=>{
                                 return <option key={i} value={curr}>{curr}</option>
@@ -93,10 +110,10 @@ const AddEmployee = () => {
                 </div>
 
                 <div className="mb-3">
-                    <CustomLoaderButton text='Add Employee'/>
+                    <CustomLoaderButton isLoading={loading} text='Add Employee'/>
                 </div>
 
-            </form>
+            </Form>
         </Formik>
     </Layout>
   )
