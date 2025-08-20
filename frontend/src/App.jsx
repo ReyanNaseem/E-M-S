@@ -8,6 +8,7 @@ import AuthRoutes from './routes/AuthRoutes'
 import IsLogin from './routes/IsLogin'
 import AddEmployee from './pages/AddEmployee'
 import AllEmployee from './pages/AllEmployee'
+import UpdateEmployee from './pages/UpdateEmployee'
 
 function App() {
 
@@ -25,9 +26,10 @@ function App() {
           <Route path='/' element={<Dashboard/>}/>
           <Route path='/add-employee' element={<AddEmployee/>}/>
           <Route path='/all-employee' element={<AllEmployee/>}/>
+          <Route path='/update-employee/:id' element={<UpdateEmployee/>}/>
         </Route>
         
-        <Route path='*' element={'404 not found'}/>
+        <Route path='*' element={<h1>404 not found</h1>}/>
       </Routes>
 
     </div>

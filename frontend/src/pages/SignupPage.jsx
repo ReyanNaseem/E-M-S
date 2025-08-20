@@ -73,103 +73,122 @@ export const SignupPage = () => {
 
   return (
     <>
-      <Navbar/>
-      <div className="min-h-[70vh] flex items-center justify-center flex-col py-10">
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={initialValues}
-          onSubmit={onSubmitHandler}
-        >
+      {/* // <Navbar/> */}
+      <div className="flex w-full h-[100vh]">
+        <div className="w-[50%] hidden md:block">
+          <img
+            className="h-full w-full bg-cover"
+            src="./public/homepicture.avif"
+            alt=""
+          />
+        </div>
+        <div className='md:w-[50%] w-full bg-[#313131] flex items-center justify-center'>
+          <div className="w-full min-h-[70vh] flex items-center justify-center flex-col py-10">
+            <h1 className='md:text-5xl text-4xl font-pbold text-[#27C4D4]'>Start managing <br /> employees <span className='text-[#E94825]'>smarter</span></h1>
+            <Formik
+              validationSchema={validationSchema}
+              initialValues={initialValues}
+              onSubmit={onSubmitHandler}
+            >
+              <Form className="w-[90%] md:w-[70%] py-10 px-4 rounded ">
+                <div className="mb-3">
+                  {/* <label htmlFor="name">Name</label> */}
+                  <Field
+                    type="text"
+                    name="name"
+                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] rounded px-3 outline-none placeholder:font-pmedium"
+                    placeholder="Enter your Name"
+                  />
+                  <ErrorMessage
+                    name="name"
+                    className="text-red-500 text-xs"
+                    component={"p"}
+                  />
+                </div>
 
-          <Form className="w-[98%] md:w-1/2 lg:w-1/3 border-[2px] py-10 px-4 rounded border-gray-400 ">
-            
-            <div className="mb-3">
-              <label htmlFor="name">Name</label>
-              <Field
-                type="text"
-                name="name"
-                className="w-full py-2 border border-gray-500 rounded px-3 outline-none placeholder:font-pmedium"
-                placeholder="Enter your Name"
-              />
-              <ErrorMessage
-                name="name"
-                className="text-red-500 text-xs"
-                component={"p"}
-              />
-            </div>
+                <div className="mb-3">
+                  {/* <label htmlFor="email">Email</label> */}
+                  <Field
+                    type="email"
+                    name="email"
+                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] rounded px-3 outline-none placeholder:font-pmedium"
+                    placeholder="Enter your Email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    className="text-red-500 text-xs"
+                    component={"p"}
+                  />
+                </div>
 
-            <div className="mb-3">
-              <label htmlFor="email">Email</label>
-              <Field
-                type="email"
-                name="email"
-                className="w-full py-2 border border-gray-500 rounded px-3 outline-none placeholder:font-pmedium"
-                placeholder="Enter your Email"
-              />
-              <ErrorMessage
-                name="email"
-                className="text-red-500 text-xs"
-                component={"p"}
-              />
-            </div>
+                <div className="mb-3">
+                  {/* <label htmlFor="password">Password</label> */}
+                  <div className="flex w-full border-b bg-transparent border-[#27C4D4] rounded items-center justify-between px-4">
+                    <Field
+                      type={toggel ? "text" : "password"}
+                      name="password"
+                      className="w-full py-2 bg-transparent text-white outline-none placeholder:font-pmedium"
+                      placeholder="Enter your Password"
+                    />
+                    <button
+                      onClick={() => setToggel(!toggel)}
+                      type="button"
+                      className="text-[#27C4D4] text-2xl"
+                    >
+                      {toggel ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+                  <ErrorMessage
+                    name="password"
+                    className="text-red-500 text-xs"
+                    component={"p"}
+                  />
+                </div>
 
-            <div className="mb-3">
-              <label htmlFor="password">Password</label>
-              <div className="flex w-full border border-gray-500 rounded items-center justify-between px-4">
-                <Field
-                  type={toggel ? "text" : "password"}
-                  name="password"
-                  className="w-full py-2 outline-none placeholder:font-pmedium"
-                  placeholder="Enter your Password"
-                />
-                <button
-                  onClick={() => setToggel(!toggel)}
-                  type="button"
-                  className="text-gray-400 text-2xl"
-                >
-                  {toggel ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-              <ErrorMessage
-                name="password"
-                className="text-red-500 text-xs"
-                component={"p"}
-              />
-            </div>
+                <div className="flex mb-3 items-center text-white justify-between">
+                  <p className="text-center w-1/2">{captcha}</p>
+                  <button
+                    onClick={generateCaptcha}
+                    type="button"
+                    className="text-center w-1/2"
+                  >
+                    <HiRefresh />
+                  </button>
+                  <div className="flex flex-col w-full">
+                    <Field
+                      name="captcha"
+                      className="w-full py-2 border-b text-white border-[#27C4D4] bg-transparent font-pbold rounded px-3 outline-none placeholder:font-pmedium"
+                      placeholder="Enter your Captcha"
+                    />
+                    <ErrorMessage
+                      name="captcha"
+                      className="text-red-500 text-xs"
+                      component={"p"}
+                    />
+                  </div>
+                </div>
 
-            <div className="flex mb-3 items-center justify-between">
-              <p className="text-center w-1/2">{captcha}</p>
-              <button onClick={generateCaptcha} type='button' className="text-center w-1/2">
-                <HiRefresh />
-              </button>
-              <div className="flex flex-col w-full">
-                <Field
-                  name="captcha"
-                  className="w-full py-2 border border-gray-500 font-pbold rounded px-3 outline-none placeholder:font-pmedium"
-                  placeholder="Enter your Captcha"
-                  
-                />
-                <ErrorMessage
-                  name="captcha"
-                  className="text-red-500 text-xs"
-                  component={"p"}
-                />
-              </div>
-            </div>
+                <div className="mb-3">
+                  <CustomLoaderButton isLoading={loading} text="Signup" />
+                </div>
 
-            <div className="mb-3">
-            <CustomLoaderButton isLoading={loading} text='Signup'/>
-            </div>
-
-            <div className="mb-3">
-              <p className="text-center">Already have an account ? <Link to={'/login'} className='font-psmbold text-indigo-500'>Login</Link></p>
-            </div>
-
-          </Form>
-
-        </Formik>
+                <div className="mb-3">
+                  <p className="text-center text-white">
+                    Already have an account ?{" "}
+                    <Link
+                      to={"/login"}
+                      className="font-psmbold text-blue-300"
+                    >
+                      Login
+                    </Link>
+                  </p>
+                </div>
+              </Form>
+            </Formik>
+          </div>
+        </div>
       </div>
-      <Footer/>
+      {/* // <Footer/> */}
     </>
   );
 }

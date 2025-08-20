@@ -115,9 +115,28 @@ const getAllUser = async(req, res)=>{
     }
 }
 
+const uploadImage = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    return res.status(201).json({
+      image: req.file.path, // ✅ renamed so frontend matches
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Image not uploaded",
+      error: error.message,
+    });
+  }
+};
+
+
+
 export {
     registerUser,
     loginUser,
     verifyUser,
-    getAllUser
+    getAllUser,
+    uploadImage
 }

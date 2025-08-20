@@ -13,8 +13,8 @@ const Navbar = () => {
 
   return (
     <>
-    <header className='w-full shadow'>
-        <div className='w-[96%] lg:w-[80%] container mx-auto py-4 flex items-center justify-between'>
+    <header className='w-full shadow bg-[#313131] sticky'>
+        <div className='w-[96%] lg:w-[80%] container mx-auto py-1 flex items-center justify-between'>
             <LogoContainer/>
             <ul className='flex items-center justify-center gap-x-3'>
               {!user?<>
