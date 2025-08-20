@@ -5,7 +5,7 @@ import { axiosClient } from '../utils/axiosClient'
 import EmpCard from '../components/EmpCard'
 
 const AllEmployee = () => {
-  const [employees, setEmployees] = useState([])
+  const [employees, setEmployees] = useState([]);
 
   const fetchAllEmployees = async()=>{
     try {

@@ -78,7 +78,7 @@ export const SignupPage = () => {
         <div className="w-[50%] hidden md:block">
           <img
             className="h-full w-full bg-cover"
-            src="./public/homepicture.avif"
+            src="/homepicture.avif"
             alt=""
           />
         </div>

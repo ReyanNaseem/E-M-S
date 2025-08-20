@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-    baseURL: 'http://localhost:8080/api/v1/users'
+    baseURL: 'https://e-m-s-one.vercel.app/api/v1/users'
 })
