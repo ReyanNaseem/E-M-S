@@ -27,7 +27,7 @@ const sidebarItemList = [
 const Layout = ({children}) => {
   const {pathname} = useLocation();
   return (
-    <div className="min-h-screen flex flex-col bg-white relative">
+    <div className="min-h-screen min-w-0 w-full flex flex-col bg-white relative overflow-x-auto">
       <Navbar />
       <div className="flex flex-grow w-[90%] mx-auto items-start flex-col lg:flex-row py-2 gap-x-1">
         <div className="w-1/4 hidden lg:flex flex-col gap-2 h-screen p-2 bg-[#313131] rounded-md">
@@ -49,7 +49,7 @@ const Layout = ({children}) => {
           })}
         </div>
 
-        <ul className="flex lg:hidden items-center mb-2 gap-x-1 overflow-x-auto whitespace-nowrap scrollbar-hide">
+        {/* <ul className="flex lg:hidden items-center mb-2 gap-x-1 overflow-x-auto whitespace-nowrap scrollbar-hide">
           {sidebarItemList.map((curr, i) => {
             return (
               <li
@@ -65,7 +65,26 @@ const Layout = ({children}) => {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
+        <div className="w-full min-w-0 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch] scrollbar-hide">
+          <ul className="w-max flex items-center mb-2 gap-x-1 whitespace-nowrap py-1">
+            {sidebarItemList.map((curr, i) => (
+              <li
+                key={i}
+                className={clsx(
+                  "flex gap-x-1 bg-[#313131] items-center px-2 py-1 text-white rounded-full flex-none",
+                  "hover:bg-[#374151] rounded",
+                  curr.link === pathname && "bg-[#374151]"
+                )}
+              >
+                <curr.Icon className="text-md" />
+                <Link className="text-sm" to={curr.link}>
+                  {curr.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <section className="w-full">{children}</section>
       </div>
