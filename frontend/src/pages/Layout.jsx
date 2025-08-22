@@ -66,7 +66,7 @@ const Layout = ({children}) => {
             );
           })}
         </ul> */}
-        <div className="w-full min-w-0 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch] scrollbar-hide">
+        <div className="w-full min-w-0 lg:hidden overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch] scrollbar-hide">
           <ul className="w-max flex items-center mb-2 gap-x-1 whitespace-nowrap py-1">
             {sidebarItemList.map((curr, i) => (
               <li
