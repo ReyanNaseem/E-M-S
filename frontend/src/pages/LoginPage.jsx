@@ -83,21 +83,21 @@ export const LoginPage = () => {
         </div>
         <div className='md:w-[50%] w-full bg-[#313131] flex items-center justify-center'>
           <div className="w-full min-h-[70vh] flex items-center justify-center flex-col py-10">
-            <h1 className='text-5xl font-pbold text-[#27C4D4]'>Start managing <br /> employees <span className='text-[#E94825]'>smarter</span></h1>
+            <h1 className='md:text-5xl text-4xl font-pbold text-[#27C4D4]'>Start managing <br /> employees <span className='text-[#E94825]'>smarter</span></h1>
             <Formik
               validationSchema={validationSchema}
               initialValues={initialValues}
               onSubmit={onSubmitHandler}
             >
 
-              <Form className="w-[70%] py-10 px-4 rounded">
+              <Form className="w-[90%] md:w-[70%] py-10 px-4 rounded">
 
                 <div className="mb-3">
                   {/* <label htmlFor="email">Email</label> */}
                   <Field
                     type="email"
                     name="email"
-                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] rounded px-3 outline-none placeholder:font-pmedium"
+                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] px-3 outline-none placeholder:font-pmedium"
                     placeholder="Enter your Email"
                   />
                   <ErrorMessage
@@ -109,7 +109,7 @@ export const LoginPage = () => {
 
                 <div className="mb-3">
                   {/* <label htmlFor="password">Password</label> */}
-                  <div className="flex w-full border-b text-white bg-transparent border-[#27C4D4] rounded items-center justify-between px-4">
+                  <div className="flex w-full border-b text-white bg-transparent border-[#27C4D4] items-center justify-between px-4">
                     <Field
                       type={toggel ? "text" : "password"}
                       name="password"
@@ -139,7 +139,7 @@ export const LoginPage = () => {
                   <div className="flex flex-col w-full">
                     <Field
                       name="captcha"
-                      className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] font-pbold rounded px-3 outline-none placeholder:font-pmedium"
+                      className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] font-pbold px-3 outline-none placeholder:font-pmedium"
                       placeholder="Enter your Captcha"
                     />
                     <ErrorMessage

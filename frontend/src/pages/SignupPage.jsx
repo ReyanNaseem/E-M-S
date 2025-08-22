@@ -96,7 +96,7 @@ export const SignupPage = () => {
                   <Field
                     type="text"
                     name="name"
-                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] rounded px-3 outline-none placeholder:font-pmedium"
+                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] px-3 outline-none placeholder:font-pmedium"
                     placeholder="Enter your Name"
                   />
                   <ErrorMessage
@@ -111,7 +111,7 @@ export const SignupPage = () => {
                   <Field
                     type="email"
                     name="email"
-                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] rounded px-3 outline-none placeholder:font-pmedium"
+                    className="w-full py-2 border-b text-white bg-transparent border-[#27C4D4] px-3 outline-none placeholder:font-pmedium"
                     placeholder="Enter your Email"
                   />
                   <ErrorMessage
@@ -123,7 +123,7 @@ export const SignupPage = () => {
 
                 <div className="mb-3">
                   {/* <label htmlFor="password">Password</label> */}
-                  <div className="flex w-full border-b bg-transparent border-[#27C4D4] rounded items-center justify-between px-4">
+                  <div className="flex w-full border-b bg-transparent border-[#27C4D4] items-center justify-between px-4">
                     <Field
                       type={toggel ? "text" : "password"}
                       name="password"
@@ -157,7 +157,7 @@ export const SignupPage = () => {
                   <div className="flex flex-col w-full">
                     <Field
                       name="captcha"
-                      className="w-full py-2 border-b text-white border-[#27C4D4] bg-transparent font-pbold rounded px-3 outline-none placeholder:font-pmedium"
+                      className="w-full py-2 border-b text-white border-[#27C4D4] bg-transparent font-pbold px-3 outline-none placeholder:font-pmedium"
                       placeholder="Enter your Captcha"
                     />
                     <ErrorMessage
