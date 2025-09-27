@@ -75,7 +75,7 @@ const deleteEmployee = async(req, res)=>{
     } catch (error) {
         
         return res.status(500).json({
-            message: 'An error occur while deleting employees',
+            message: 'An error occur while deleting employee',
             error: error.message
         })
 
